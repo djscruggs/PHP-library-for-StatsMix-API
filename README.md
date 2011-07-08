@@ -35,7 +35,7 @@ Add metadata via the "meta" option in $options - you can use this to add granula
 
 	StatsMix::track("File Uploads", 1, array('meta' => array("file type" => "PDF")));
 
-If you need the ability to update a stat after the fact (i.e. you're updating the same stat several times a day),  you can pass in a unique identifier called `ref_id`, which is scoped to the metric (so you can use the same identifier across metrics) This example uses the current date (in UTC time) for ref_id.
+If you need the ability to update a stat after the fact (i.e. you're updating the same stat several times a day),  you can pass in a unique identifier called `ref_id`, which is scoped to the metric (so you can use the same identifier across metrics) This example uses the current date (in UTC time) for `ref_id`.
 
 	StatsMix::track("File Uploads", 1, array('ref_id' => gmstrftime('%Y-%m-%d'), 'meta' => array("file type" => "PDF")));
 
@@ -55,7 +55,7 @@ If you have multiple profiles in your account, specify which one via `profile_id
 
 	StatsMix::track("metric name that may be in multiple profiles", 1, array('profile_id' => "PROFILE_ID"));
 
-To create metrics and stats using a more OO approach, check out the classes `SmMetric` and `SmStat` in StatsMix.php. Using them you can do things like this:
+To create metrics and stats using a more OO approach, check out the classes **SmMetric** and **SmStat** in StatsMix.php. Using them you can do things like this:
 
 Create a metric:
 
@@ -65,9 +65,7 @@ Create a metric:
 	if($metric->error){
 		echo "<p>Error: {$metric->error}</p>";
 	}
-
-View the xml response:
-
+	//view the xml response:
 	echo $metric->get_response();
 
 ## More Documentation
