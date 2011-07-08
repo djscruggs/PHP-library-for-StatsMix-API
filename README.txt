@@ -37,8 +37,8 @@ StatsMix::track("File Uploads", 1, array('meta' => array("file type" => "PDF")))
 
 /** 
  *	If you need the ability to update a stat after the fact (i.e. you're updating the same stat several times a day), 
- *  you can pass in a unique identifier ref_id (scoped to that metric)
- *  This example uses the current date (UTC)
+ *  you can pass in a unique identifier called ref_id, which is scoped to the metric (i.e. you can use the same identifier across metrics)
+ *  This example uses the current date (in UTC time) for ref_id
  */
 StatsMix::track("File Uploads", 1, array('ref_id' => gmstrftime('%Y-%m-%d'), 'meta' => array("file type" => "PDF")));
 
@@ -55,7 +55,6 @@ StatsMix::set_test_metric_name("My Test Metric");
 StatsMix::track("metric name that may be in multiple profiles", 1, array('profile_id' => "PROFILE_ID"));
 
 ?>
-
 
 To create metrics and stats using a more OO approach, check out the classes SmMetric and SmStat in StatsMix.php. Using them you can do things like this:
 
