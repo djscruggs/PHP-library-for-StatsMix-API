@@ -1,7 +1,5 @@
 This is a PHP library for the StatsMix api - see http://www.statsmix.com/developers
 
-NOTE: This library is undergoing rapid improvements. Please use caution and check for updates accordingly.
-
 StatsMix makes it easy to track, chart, and share application and business metrics. Use StatsMix to:
 
 *Log every time a particular event happens (such as a user creating a new blog post)

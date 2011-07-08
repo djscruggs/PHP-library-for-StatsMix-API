@@ -1,9 +1,8 @@
 <?php
 
 /**
- * Sample File 2, phpDocumentor Quickstart
- * 
  * This File implements the StatsMix REST API in PHP.
+ * Full API documentation is at http://www.statsmix.com/developers/documentation
  * @author Derek Scruggs <me@derekscruggs.com>
  * @version 1.0
  * @package statsmix
@@ -742,6 +741,9 @@ class SmStat extends SmResource {
 	}
 }
 
+/**
+ * Wrapper class for the track endpoint
+ */
 class SmTrack extends SmBase{
 	const base_uri = 'https://statsmix.com/api/v2/track';
 	
