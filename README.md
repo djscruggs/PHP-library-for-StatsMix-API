@@ -15,20 +15,19 @@ To get started, you'll need an API key for StatsMix. You can get a free develope
 
 ## Quick Start
 
-You can copy & paste the examples below. Just make sure to change the API key.
+You can get 98% of our functionality by copying & pasting the examples below. Just make sure to change the API key. 
+
+The basic pattern:
 
 	require "StatsMix.php";
 	StatsMix::set_api_key("YOUR API KEY");
-
-The basic format:
-
 	StatsMix::track($name_of_metric,$value = 1,$options = array());
 
-Push a stat with the value 1 (default) to a metric called "My First Metric"
+Push a stat with the value 1 (default) to a metric called "My First Metric":
 
 	StatsMix::track("My First Metric");
 
-Push the value 20
+Push the value 20:
 
 	StatsMix::track("My First Metric",20);
 
@@ -36,11 +35,11 @@ Add metadata via the "meta" option in $options - you can use this to add granula
 
 	StatsMix::track("File Uploads", 1, array('meta' => array("file type" => "PDF")));
 
-If you need the ability to update a stat after the fact (i.e. you're updating the same stat several times a day),  you can pass in a unique identifier called `ref_id`, which is scoped to the metric (i.e. you can use the same identifier across metrics) This example uses the current date (in UTC time) for ref_id.
+If you need the ability to update a stat after the fact (i.e. you're updating the same stat several times a day),  you can pass in a unique identifier called `ref_id`, which is scoped to the metric (so you can use the same identifier across metrics) This example uses the current date (in UTC time) for ref_id.
 
 	StatsMix::track("File Uploads", 1, array('ref_id' => gmstrftime('%Y-%m-%d'), 'meta' => array("file type" => "PDF")));
 
-If you need to timestamp the stat for something other than now, pass in a UTC datetime called `generated_at`
+If you need to timestamp the stat for something other than now, pass in a UTC datetime with the key `generated_at`
 
 	StatsMix::track("File Uploads", 1, array('generated_at' => gmstrftime('%Y-%m-%d %H:%I:%S',strtotime('yesterday'))));
 
@@ -55,7 +54,6 @@ To redirect all stats in dev environment to a test metric:
 If you have multiple profiles in your account, specify which one via `profile_id`:
 
 	StatsMix::track("metric name that may be in multiple profiles", 1, array('profile_id' => "PROFILE_ID"));
-
 
 To create metrics and stats using a more OO approach, check out the classes `SmMetric` and `SmStat` in StatsMix.php. Using them you can do things like this:
 
