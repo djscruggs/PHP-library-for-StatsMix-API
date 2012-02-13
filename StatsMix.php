@@ -742,6 +742,76 @@ class SmStat extends SmResource {
 }
 
 /**
+ * Implementation of StatsMix user for partner api
+ * @see www.statsmix.com/developers/partner_api
+ * @package statsmix
+ */
+class SmUser extends SmResource {
+	const base_uri = 'https://statsmix.com/api/v2/partners/users';
+	
+	
+	public function get_base_uri(){
+		return self::base_uri;
+	}
+	
+	public function get_list_uri(){
+		return self::base_uri . ".{$this->_format}";
+	}
+	
+	public function get_resource_uri(){
+		return self::base_uri . "/{$this->_id}.{$this->_format}";
+	}
+	/* array of field names to look for when fetching */
+	public function get_readable_fields(){
+		return $this->_readable_fields;
+	}
+	
+	public function update(){
+		//setup data to PUT
+		$data = array();
+		if(!$this->_id)
+			throw new StatsMixException("You must set id before calling " . __METHOD__);
+
+		if(isset($this->_email))
+			$data['email'] = $this->_email;
+		if(isset($this->_name))
+			$data['name'] = $this->_name;
+		if(isset($this->_company))
+			$data['company'] = $this->_company;
+		if(isset($this->_url))
+			$data['url'] = $this->_url;
+		if(is_array($this->_metrics))
+			$data['metrics'] = $this->_metrics;
+		return parent::update($data);
+	}
+	
+	public function create(){
+		//setup data to POST
+		
+		if (!$this->_email)
+			throw new StatsMixException("email must be set before calling " . __METHOD__);
+
+		$data['email'] = $this->_email;
+		$data['name'] = $this->_name;
+		$data['plan'] = $this->_plan;
+		$data['company'] = $this->_company;
+		$data['url'] = $this->_url;
+		$data['metrics'] = $this->_metrics;
+		
+		return parent::create($data);
+	}
+	
+	/**
+	 * @param integer $numRecords number of records to return. The StatsMix API returns 50 by default.
+	 */
+	public function get_list($numRecords = null){
+		if(!$this->_metric_id)
+			throw new StatsMixException("metric_id of stats to fetch must be set before calling " . __METHOD__);
+		return parent::get_list($numRecords,$options);
+	}
+}
+
+/**
  * Wrapper class for the track endpoint
  */
 class SmTrack extends SmBase{
@@ -756,7 +826,7 @@ class SmTrack extends SmBase{
 	function save($name, $value = null, $options = array())
 	{
 		$data['name'] = $name;
-		if($value)
+		if($value != null)
 			$data['value'] = $value;
 		$data = array_merge($options,$data);
 		if(is_array(@$data['meta']))
