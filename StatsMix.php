@@ -4,7 +4,7 @@
  * This File implements the StatsMix REST API in PHP.
  * Full API documentation is at http://www.statsmix.com/developers/documentation
  * @author Derek Scruggs <me@derekscruggs.com>
- * @version 1.0
+ * @version 1.1
  * @package statsmix
  */
 //Requires PHP v 5.2 or higher
